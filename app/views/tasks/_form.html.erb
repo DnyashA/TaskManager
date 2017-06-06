@@ -1,20 +1,32 @@
+<% if @task.errors.any? %>
+	<div class="alert alert-danger">
+		<h5><%= t('common.errors') %> </h5>
+		<ul>
+			<% @task.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
 <%= form_for @task do |f| %>
-	<div class="form-control">
+	<div class="form-group">
 		<%= f.label :name %>
-		<%= f.text_field :name %>
+		<%= f.text_field :name, class: 'form-control' %>
 	</div>
 
-	<div class="form-control">
+	<div class="form-group">
 		<%= f.label :summary %>
-		<%= f.text_area :summary %>
+		<%= f.text_area :summary, class: 'form-control' %>
 	</div>
 
-	<div class="form-control">
+	<div class="form-group">
 		<%= f.label :description %>
-		<%= f.text_area :description %>
+		<%= f.text_area :description, class: 'form-control' %>
 	</div>
 
-	<div class="form-control">
-		<%= f.submit 'Save' %>
+	<div class="form-group">
+		<%= f.submit 'Save', class: 'btn btn-primary' %>
+		<%= link_to 'Cancel', :back, class: 'btn btn-outline-secondary' %>
 	</div>
 <% end %>
