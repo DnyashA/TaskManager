@@ -1,0 +1,27 @@
+<h1>Taskboxes</h1>
+
+<div class="buttons-panel">
+	<%= link_to 'Add taskbox', new_taskbox_path, class: 'btn btn-outline-primary btn-sm' %>
+</div>
+
+<section id="taskboxes">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @taskboxes.each do |taskbox| %>
+				<tr>
+					<td><%= taskbox.name %></td>
+					<td>
+						<%= link_to 'Edit', edit_taskbox_path(taskbox), class: 'btn btn-outline-primary btn-sm' %>
+						<%= link_to 'Delete', taskbox_path(taskbox), method: :delete, data: { confirm: 'Are tou shure you want ot delete this taskbox?' }, class: 'btn btn-outline-danger btn-sm' %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</section>

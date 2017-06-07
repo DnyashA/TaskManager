@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-
+	before_action :authenticate_user!, except: :index
+	
 	before_action :set_task, only: [ :show, :destroy, :edit, :update ]
 
 	def index
@@ -18,7 +19,8 @@ class TasksController < ApplicationController
 		if @task.save
 			redirect_to @task, success: 'Task successfully created'
 		else
-			render :new, danger: 'Whoops, something wrong' 
+			flash.now[:danger] = 'Whoops, something wrong' 
+			render :new
 		end
 	end
 
@@ -29,7 +31,8 @@ class TasksController < ApplicationController
 		if @task.update_attributes(task_params)
 			redirect_to @task, success: 'Task successfully updated'
 		else
-			render :edit, danger: 'Whoops, something wrong' 
+			flash.now[:danger] = 'Whoops, something wrong' 
+			render :edit
 		end
 	end
 
@@ -42,7 +45,7 @@ class TasksController < ApplicationController
 	private
 
 	def task_params
-		params.require(:task).permit(:name, :summary, :description)
+		params.require(:task).permit(:name, :summary, :description, :taskbox_id)
 	end
 
 	def set_task

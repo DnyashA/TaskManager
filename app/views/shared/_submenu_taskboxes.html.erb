@@ -1,0 +1,9 @@
+<ul class="nav nav-pills nav-stacked nested_nav">
+	<% taskboxes.each do |taskbox, children| %>
+		<li>
+			<%= link_to taskbox.name, taskbox, class: "nav-link #{'active' if current_page?(taskbox_path(taskbox)) || @task.present? && @task.taskbox == taskbox}" %>
+			<%= render 'shared/submenu_taskboxes', taskboxes: children if children.present? %>
+		</li>
+	<% end %>
+</ul>
+		
