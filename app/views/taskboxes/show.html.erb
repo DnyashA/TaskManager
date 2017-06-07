@@ -1,5 +1,9 @@
 <h1><%= @taskbox.name %> </h1>
 
+<%= link_to 'Edit', edit_taskbox_path(@taskbox), class: 'btn btn-outline-primary btn-sm' %>
+<%= link_to 'Delete', taskbox_path(@taskbox), method: :delete, data: { confirm: 'Are tou shure you want ot delete this taskbox?' }, class: 'btn btn-outline-danger btn-sm' %>
+
 <section id="tasks">
 	<%= render @tasks %>
 </section>
+	

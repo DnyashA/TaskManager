@@ -14,9 +14,26 @@
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
-		      <a class="navbar-brand" href=<%= tasks_path %>>Tasks</a>
+		      <a class="navbar-brand" href=<%= tasks_path %>>Home</a>
 		    </div>
-			<%= link_to 'Add task', new_task_path, class: 'btn btn-outline-primary pull-xs-right' %>
+				<%#<%= link_to 'Add task', new_task_path, class: 'btn btn-outline-primary pull-xs-right' %> 
+				<%#<ul class="navbar-nav mr-auto"> %>
+					<% if user_signed_in? %>
+						<%#<li class="nav-item">%>
+							<%= link_to "Exit", destroy_user_session_path, method: :delete, class: "nav-link" %>
+						<%#</li>%>
+					<% else %>
+						<%#<li class="nav-item">%>
+						<div class="row">
+							<%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
+							<%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+						</div>
+						<%#</li>%>
+						<%#<li class="nav-item">%>
+							
+						<%#</li>%>
+					<% end %>
+				<%#</ul>%>
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		  </div><!-- /.container-fluid -->
 		</nav>
@@ -26,16 +43,22 @@
 		<div class="row">
 			<div class="col-md-12">
 				<% flash.each do |name, message| %>
-					<div class="alert alert-<%= name %>">
+					<div class="alert <%= bootstrap_class_for(name) %>">
+						<button class="close" data-dismiss="alert">&times;</button>
 						<%= message %>
 					</div>
 				<% end %>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
-				<%= render 'shared/submenu' %>
-			</div>
+			<% if user_signed_in? %>
+				<div class="col-md-3">
+					<%= render 'shared/submenu' %>
+					<div class="buttons-panel main_buttons_panel">
+						<%= link_to 'Add...', new_taskbox_path, class: 'btn btn-outline-primary btn-sm' %>
+					</div>
+				</div>
+			<% end %>
 			<div class="col-md-9">
 				<%= yield %>
 			</div>

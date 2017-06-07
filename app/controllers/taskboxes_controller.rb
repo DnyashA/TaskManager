@@ -1,5 +1,7 @@
 class TaskboxesController < ApplicationController
 
+	before_action :authenticate_user!
+	
 	before_action :set_taskbox, only: [ :show, :destroy, :edit, :update ]
 
 	def index
@@ -12,6 +14,7 @@ class TaskboxesController < ApplicationController
 
 	def new
 		@taskbox = Taskbox.new
+		@taskboxes = Taskbox.all.order(:name)
 	end
 
 	def create
@@ -19,18 +22,21 @@ class TaskboxesController < ApplicationController
 		if @taskbox.save
 			redirect_to @taskbox, success: 'Taskbox successfully created'
 		else
+			@taskboxes = Taskbox.all.order(:name)
 			flash.now[:danger] = 'Whoops, something wrong' 
 			render :new
 		end
 	end
 
 	def edit
+		@taskboxes = Taskbox.where("id != #{@taskbox.id}").order(:name)
 	end
 
 	def update
 		if @taskbox.update_attributes(taskbox_params)
 			redirect_to @taskbox, success: 'Taskbox successfully updated'
 		else
+			@taskboxes = Taskbox.where("id != #{@taskbox.id}").order(:name)
 			flash.now[:danger] = 'Whoops, something wrong' 
 			render :edit
 		end
