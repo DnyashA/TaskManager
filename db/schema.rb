@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605145221) do
+ActiveRecord::Schema.define(version: 20170606221127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "taskboxes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "ancestry"
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
@@ -23,6 +30,8 @@ ActiveRecord::Schema.define(version: 20170605145221) do
     t.boolean  "shared"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "taskbox_id"
+    t.index ["taskbox_id"], name: "index_tasks_on_taskbox_id", using: :btree
   end
 
 end
