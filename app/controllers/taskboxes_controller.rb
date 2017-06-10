@@ -1,8 +1,7 @@
 class TaskboxesController < ApplicationController
 
 	before_action :authenticate_user!
-	
-	before_action :set_taskbox, only: [ :show, :destroy, :edit, :update ]
+	before_action :set_taskbox, only: [ :destroy, :edit, :update, :show ]
 
 	def index
 		@taskboxes = Taskbox.all
@@ -15,6 +14,7 @@ class TaskboxesController < ApplicationController
 	def new
 		@taskbox = Taskbox.new
 		@taskboxes = Taskbox.all.order(:name)
+		@current_uid = User.where(id: current_user)
 	end
 
 	def create
@@ -44,17 +44,21 @@ class TaskboxesController < ApplicationController
 
 	def destroy
 		@taskbox.destroy
-		redirect_to taskboxes_path, success: 'Taskbox successfully deleted'
+		redirect_to tasks_path, success: 'Taskbox successfully deleted'
 	end
 
 
 	private
 
 	def taskbox_params
-		params.require(:taskbox).permit(:name, :parent_id)
+		params.require(:taskbox).permit(:name, :parent_id, :user_id)
 	end
 
 	def set_taskbox
 		@taskbox = Taskbox.find(params[:id])
+	end
+
+	def set_current_uid
+		@current_uid = User.find(id: current_user)
 	end
 end
