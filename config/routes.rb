@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root 'tasks#index'
   resources :tasks
   resources :taskboxes, except: :index
+  resources :contacts
 end

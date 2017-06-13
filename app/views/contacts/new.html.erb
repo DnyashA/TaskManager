@@ -1,0 +1,32 @@
+<h1>New contact</h1>
+
+<% if @contact.errors.any? %>
+	<div class="alert alert-danger">
+		<h5><%= t('common.errors') %> </h5>
+		<ul>
+			<% @contact.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<%= form_for @contact do |f| %>
+	<div class="form-group">
+		<%= f.label :email %>
+		<%= f.email_field :email, class: 'form-control' %>
+	</div>
+
+	<%= f.hidden_field :owner_id, value: User.find_by(id: current_user).id %>
+	<%= f.hidden_field :user_id, value: User.find_by(id: current_user).id %>
+
+	<div class="form-group">
+		<%= f.label :synonim %>
+		<%= f.text_field :synonim, class: 'form-control' %>
+	</div>
+
+	<div class="form-group">
+		<%= f.submit 'Add', class: 'btn btn-primary' %>
+		<%= link_to 'Cancel', :back, class: 'btn btn-outline-secondary' %>
+	</div>
+<% end %>

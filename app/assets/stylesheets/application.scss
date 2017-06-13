@@ -6,7 +6,7 @@
 article.task {
 	margin-bottom: .5px;
 	padding: 1em 0;
-	border-bottom: 1px solid lightblue;
+	border-bottom: 1px solid #333333;
 }
 h1, h2 {
 	margin-bottom: 0;
@@ -33,7 +33,7 @@ article.task-show {
 	margin-left: 1em;
 }
 .main_buttons_panel{
-	margin-left: .8em;
+	padding-top: .5em;
 }
 .edit_user.error_explanation {
 	color: #d01612;
@@ -44,4 +44,26 @@ article.task-show {
 .buttons {
 	padding-top: .6em;
 	align: right;
+}
+section.tasks {
+	padding-top: 1em;
+}
+.submenu_nav{
+	padding-top: 1em;
+}
+.submenu {
+	border-right: 1px solid #333333;
+}
+.back {
+	background-color: #999999;
+}
+.bback {
+	background-color: #999999;
+}
+.navcon{
+	background-color: #333333;
+}
+.mainpage {
+	border-right: 1px solid #333333;
+	border-left: 1px solid #333333;
 }
