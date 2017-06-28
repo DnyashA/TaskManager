@@ -1,7 +1,7 @@
 <div class="submenu">
 	<h2>Taskboxes</h2>
-	<ul class="nav nav-pills nav-stacked">
-		<% Taskbox.roots.each do |taskbox| %>
+	<ul class="nav nav-pills nav-stacked submenu_nav">
+		<% Taskbox.where(user_id: current_user).roots.each do |taskbox| %>
 			<li class="nav-item">
 				<%= link_to taskbox.name, taskbox, class: "nav-link #{'active' if current_page?(taskbox_path(taskbox)) || @task.present? && @task.taskbox == taskbox}" %>
 				<%= render 'shared/submenu_taskboxes', taskboxes: taskbox.root.descendants.arrange %>

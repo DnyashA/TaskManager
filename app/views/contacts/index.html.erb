@@ -1,0 +1,11 @@
+<div class="row">
+<h1>Contacts</h1>
+<div class="buttons-panel">
+	<%= link_to 'New contact', new_contact_path, class: 'btn btn-primary' %>
+</div>
+</div>
+<section id="contacts">
+	<% @contacts.where(owner_id: current_user).each do |contact| %>
+						<%= contact.synonim %>
+			<% end %>
+</section>

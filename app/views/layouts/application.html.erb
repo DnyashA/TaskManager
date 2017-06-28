@@ -8,19 +8,29 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-  <div class="container">
+  <body class="bback">
+  <div class="back">
+  <div class="navcon">
+  <div class="container navigation">
 	  	<nav class="navbar navbar-default">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
-		      <a class="navbar-brand" href=<%= tasks_path %>>Home</a>
+		    	<% if user_signed_in? %>
+				    <div class="row">
+				      <a class="navbar-brand" href=<%= tasks_path %>>Home</a>
+				      <%= link_to "Contacts", contacts_path, class: "nav-link" %>
+			        </div>
+		        <% end %>
 		    </div>
 				<%#<%= link_to 'Add task', new_task_path, class: 'btn btn-outline-primary pull-xs-right' %> 
 				<%#<ul class="navbar-nav mr-auto"> %>
 					<% if user_signed_in? %>
 						<%#<li class="nav-item">%>
-							<%= link_to "Exit", destroy_user_session_path, method: :delete, class: "nav-link" %>
+							<div class="row">
+								<%= link_to "My profile", edit_user_registration_path, class: "nav-link" %>
+								<%= link_to "Exit", destroy_user_session_path, method: :delete, class: "nav-link" %>
+							</div>
 						<%#</li>%>
 					<% else %>
 						<%#<li class="nav-item">%>
@@ -37,6 +47,7 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		  </div><!-- /.container-fluid -->
 		</nav>
+	</div>
 	</div>
 
 	<div class="container main">
@@ -63,6 +74,7 @@
 				<%= yield %>
 			</div>
 		</div>
+	</div>
 	</div>
   </body>
 </html>
